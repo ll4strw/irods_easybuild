@@ -1,0 +1,10 @@
+# created at: 2023-03-22 15:10:20.974804
+# valid until: 2023-03-29 15:10:20.974804
+a/avro-cpp/avro-cpp-1.11.1-GCC-11.2.0.eb
+c/Catch2/Catch2-2.13.4-GCCcore-11.2.0.eb
+c/cppzmq/cppzmq-4.9.0-GCCcore-11.2.0.eb
+f/fmt/fmt-8.1.1-GCCcore-11.2.0.eb
+i/irods-icommands/irods-icommands-4.3.0-GCC-11.2.0.eb
+i/irods/irods-4.3.0-GCC-11.2.0.eb
+n/nanodbc/nanodbc-2.14.0-GCCcore-11.2.0.eb
+s/spdlog/spdlog-1.11.0-GCCcore-11.2.0.eb

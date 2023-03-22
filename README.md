@@ -23,8 +23,8 @@ git clone git@github.com:ll4strw/irods_easybuild.git
 
 ```
 ml load EasyBuild
-cd irods_easybuild.git
-eb --robot-paths=easyconfigs  -r irods-4.3.0-GCC-11.2.0.eb [--try-amend=build_cmd='make irods_client ']
+cd irods_easybuild
+eb --robot-paths=":./easyconfigs" ./easyconfigs/i/irods/irods-4.3.0-GCC-11.2.0.eb [--dry-run] [--try-amend=build_cmd='make irods_client '] -r
 ```
 
 - Install iRODS-icommands
