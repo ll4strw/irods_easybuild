@@ -16,30 +16,28 @@ For instance, think of the deployment of `iRODS-icommands` on any GNU/Linux dist
 - Install and setup EasyBuild as described [here](https://docs.easybuild.io/installation/)
 - Clone this repository
 
-  ```
-     git clone git@github.com:ll4strw/irods_easybuild.git
-  ```
+```
+git clone git@github.com:ll4strw/irods_easybuild.git
+```
 - Install iRODS or only iRODS client libraries
 
-  ```
-     ml load EasyBuild
-     cd irods_easybuild.git
-     eb --robot-paths=easyconfigs  -r irods-4.3.0-GCC-11.2.0.eb [--try-amend=build_cmd='make irods_client ']
-
-  ```
+```
+ml load EasyBuild
+cd irods_easybuild.git
+eb --robot-paths=easyconfigs  -r irods-4.3.0-GCC-11.2.0.eb [--try-amend=build_cmd='make irods_client ']
+```
 
 - Install iRODS-icommands
 
-  ```
-     eb --robot-paths=easyconfigs  -r irods-icommands-4.3.0-GCC-11.2.0.eb 
-
-  ```
+```
+eb --robot-paths=easyconfigs  -r irods-icommands-4.3.0-GCC-11.2.0.eb 
+```
 
 ### Test
 
-  ```
-     ml purge
-     ml load irods-icommands/4.3.0-GCC-11.2.0
-     iinit
-  ```
+```
+ml purge
+ml load irods-icommands/4.3.0-GCC-11.2.0
+iinit
+```
 
