@@ -30,7 +30,7 @@ eb --robot-paths=":./easyconfigs" ./easyconfigs/i/irods/irods-4.3.0-GCC-11.2.0.e
 - Install iRODS-icommands
 
 ```
-eb --robot-paths=easyconfigs  -r irods-icommands-4.3.0-GCC-11.2.0.eb 
+eb --robot-paths=":./easyconfigs" ./easyconfigs/i/irods-icommands/irods-icommands-4.3.0-GCC-11.2.0.eb  [--dry-run] -r
 ```
 
 #### Clang, GCC, libstdc++ and libc++
