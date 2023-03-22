@@ -58,7 +58,7 @@ configopts += " -DCMAKE_EXE_LINKER_FLAGS='-fuse-ld=lld' "
 configopts += " -DCMAKE_MODULE_LINKER_FLAGS='-fuse-ld=lld' "
 
 configopts += " -DIRODS_EXTERNALS_FULLPATH_CLANG=${EBROOTCLANG} "
-configopts += " -DIRODS_EXTERNALS_FULLPATH_AVRO=/marisdata/easybuild/software/avro-cpp/1.11.1-GCC-11.2.0/ "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_AVRO=${EBROOTAVROMINCPP} "
 configopts += " -DIRODS_EXTERNALS_FULLPATH_BOOST=${EBROOTBOOST} "
 configopts += " -DIRODS_EXTERNALS_FULLPATH_CPPZMQ=${EBROOTCPPZMQ} "
 configopts += " -DIRODS_EXTERNALS_FULLPATH_ZMQ=${EBROOTZEROMQ} "
