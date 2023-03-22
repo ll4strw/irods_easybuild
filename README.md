@@ -33,6 +33,41 @@ eb --robot-paths=easyconfigs  -r irods-4.3.0-GCC-11.2.0.eb [--try-amend=build_cm
 eb --robot-paths=easyconfigs  -r irods-icommands-4.3.0-GCC-11.2.0.eb 
 ```
 
+#### Clang, GCC, libstdc++ and libc++
+
+The **current** setup builds iRODS successfully using `Clang` and `libstdc++`
+
+```
+# cat irods-4.3.0-GCC-11.2.0.eb
+configopts = " -DIRODS_BUILD_WITH_CLANG=ON "
+configopts += " -DIRODS_BUILD_AGAINST_LIBCXX=FALSE "
+configopts += " -DCMAKE_SHARED_LINKER_FLAGS='-fuse-ld=lld' "
+configopts += " -DCMAKE_EXE_LINKER_FLAGS='-fuse-ld=lld' "
+configopts += " -DCMAKE_MODULE_LINKER_FLAGS='-fuse-ld=lld' "
+
+```
+
+Is it nonetheless possible to build iRODS using `GCC` instead of `Clang` by using
+
+```
+# cat irods-4.3.0-GCC-11.2.0.eb
+configopts = " -DIRODS_BUILD_WITH_CLANG=OFF "
+configopts += " -DIRODS_BUILD_AGAINST_LIBCXX=FALSE "
+#configopts += " -DCMAKE_SHARED_LINKER_FLAGS='-fuse-ld=lld' "
+#configopts += " -DCMAKE_EXE_LINKER_FLAGS='-fuse-ld=lld' "
+#configopts += " -DCMAKE_MODULE_LINKER_FLAGS='-fuse-ld=lld' "
+
+```
+
+Similarly, you can also try building using `libc++` instead of `libstdc++`
+
+```
+# cat irods-4.3.0-GCC-11.2.0.eb
+configopts += " -DIRODS_BUILD_AGAINST_LIBCXX=TRUE "
+
+```
+
+
 ### Test
 
 ```

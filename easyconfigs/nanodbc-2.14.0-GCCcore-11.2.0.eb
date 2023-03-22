@@ -1,0 +1,44 @@
+# Copyright ll4strw <ll4il@ilorentz.org> 2023
+
+# This file is part of irods_easybuild. 
+
+# irods_easybuild is free software: you can redistribute it and/or modify it under the terms of
+# the GNU General Public License as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+
+# irods_easybuild is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along with irods_easybuild.
+# If not, see <https://www.gnu.org/licenses/>. 
+
+easyblock = 'CMakeMake'
+
+name = 'nanodbc'
+version = '2.14.0'
+
+homepage = 'https://github.com/nanodbc/nanodbc'
+description = "A small C++ wrapper for the native C ODBC API."
+
+toolchain = {'name': 'GCCcore', 'version': '11.2.0'}
+
+source_urls = ['https://github.com/%(name)s/%(name)s/archive/refs/tags/']
+sources = ['v%(version)s.tar.gz']
+checksums = ['56228372042b689beccd96b0ac3476643ea85b3f57b3f23fb11ca4314e68b9a5']
+
+builddependencies = [
+    ('binutils', '2.37'),
+    ('CMake', '3.22.1'),
+    ('Boost', '1.77.0', '', ('GCC', '11.2.0')),
+]
+
+separate_build_dir = True
+configopts = " -DBUILD_SHARED_LIBS=TRUE -DNANODBC_ENABLE_BOOST=ON "
+
+sanity_check_paths = {
+    'files': ['lib/libnanodbc.so'],
+    'dirs': ['lib/cmake', 'include/'],
+}
+
+moduleclass = 'lib'

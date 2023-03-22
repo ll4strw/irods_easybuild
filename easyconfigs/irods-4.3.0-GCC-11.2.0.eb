@@ -1,0 +1,82 @@
+# Copyright ll4strw <ll4il@ilorentz.org> 2023
+
+# This file is part of irods_easybuild. 
+
+# irods_easybuild is free software: you can redistribute it and/or modify it under the terms of
+# the GNU General Public License as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+
+# irods_easybuild is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along with irods_easybuild.
+# If not, see <https://www.gnu.org/licenses/>. 
+
+easyblock = 'CMakeMake'
+
+name = 'irods'
+version = '4.3.0'
+
+homepage = 'https://github.com/irods/irods'
+description = "The Integrated Rule-Oriented Data System (iRODS) is open source data management software used by research, commercial, and governmental organizations worldwide."
+
+toolchain = {'name': 'GCC', 'version': '11.2.0'}
+
+source_urls = ['https://github.com/irods/irods/releases/download/%(version)s/']
+sources = ['%(name)s-%(version)s.tar.gz']
+checksums = ['7bf94bf136998c052de84dddcdd6f2df0084150c297290efb4b05b9cd957b0de']
+
+
+patches = [
+    ('patches/irods-4.3.0-GCC-11.2.0_server_control_plane_CMakeLists.txt', 'server/control_plane/CMakeLists.txt'),
+]
+
+builddependencies = [
+    ('CMake', '3.22.1'),
+    ('Clang', '13.0.1', '', ('GCCcore', '11.2.0')),
+    ('Boost', '1.77.0'),
+    ('libarchive', '3.5.1'),
+    ('avro-cpp', '1.11.1'),
+    ('fmt', '8.1.1'),               # custom
+    ('nanodbc', '2.14.0'),          # custom
+    ('ZeroMQ', '4.3.4'),
+    ('Catch2', '2.13.4'),           # custom
+    ('JsonCpp', '1.9.4'),
+    ('spdlog', '1.11.0'),           # custom
+    ('nlohmann_json', '3.10.4'),
+    ('cppzmq', '4.9.0'),            # custom
+    ('OpenSSL', '1.1', '', SYSTEM),
+    ('cURL', '7.78.0'),
+]
+
+
+configopts = " -DIRODS_BUILD_WITH_CLANG=ON " 
+configopts += " -DIRODS_BUILD_AGAINST_LIBCXX=FALSE "
+configopts += " -DCMAKE_SHARED_LINKER_FLAGS='-fuse-ld=lld' "
+configopts += " -DCMAKE_EXE_LINKER_FLAGS='-fuse-ld=lld' "
+configopts += " -DCMAKE_MODULE_LINKER_FLAGS='-fuse-ld=lld' "
+
+configopts += " -DIRODS_EXTERNALS_FULLPATH_CLANG=${EBROOTCLANG} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_AVRO=/marisdata/easybuild/software/avro-cpp/1.11.1-GCC-11.2.0/ "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_BOOST=${EBROOTBOOST} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_CPPZMQ=${EBROOTCPPZMQ} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_ZMQ=${EBROOTZEROMQ} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_FMT=${EBROOTFMT} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_SPDLOG=${EBROOTSPDLOG} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_NANODBC=${EBROOTNANODBC} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_ARCHIVE=${EBROOTLIBARCHIVE} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_CATCH2=${EBROOTCATCH2} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_JSON=${EBROOTJSONCPP} "
+configopts += " -DIRODS_EXTERNALS_FULLPATH_CLANG_RUNTIME=${EBROOTCLANG} "
+
+
+
+sanity_check_paths = {
+    'files': ['lib/libirods_client.so'],
+    'dirs': ['lib', 'var/lib/irods'],
+}
+
+
+
+moduleclass = 'tools'
