@@ -8,8 +8,15 @@ The Integrated Rule-Oriented Data System (iRODS) is open source data management 
 
 ### Advantages
 
-Automated and **reprducible** way to install iRODS (or any of its components) and its external dependencies on any GNU/Linux system.
+Automated and **reproducible** way to install iRODS (or any of its components) and its external dependencies on any GNU/Linux system.
 For instance, think of the deployment of `iRODS-icommands` on any GNU/Linux distribution.
+
+If you are truly interested in _bit-to-bit_ reproducibility, please take a look at the [GNU Guix](https://guix.gnu.org/) project and install `iRODS` via
+
+```
+guix package -i  irods-client-icommands
+```
+At the time of writing, only `iRODS v4.2.8` is available.
 
 ### Installation
 
@@ -47,7 +54,7 @@ configopts += " -DCMAKE_MODULE_LINKER_FLAGS='-fuse-ld=lld' "
 
 ```
 
-Is it nonetheless possible to build iRODS using `GCC` instead of `Clang` by using
+Is it nonetheless possible to build iRODS and icommands using `GCC` instead of `Clang` by using
 
 ```
 # cat irods-4.3.0-GCC-11.2.0.eb
@@ -56,17 +63,30 @@ configopts += " -DIRODS_BUILD_AGAINST_LIBCXX=FALSE "
 #configopts += " -DCMAKE_SHARED_LINKER_FLAGS='-fuse-ld=lld' "
 #configopts += " -DCMAKE_EXE_LINKER_FLAGS='-fuse-ld=lld' "
 #configopts += " -DCMAKE_MODULE_LINKER_FLAGS='-fuse-ld=lld' "
+```
+
+However this approach leads to the following error when invoking the icommands
 
 ```
+ils 
+JSON error occurred while authenticating user [****] [[json.exception.type_error.305] cannot use operator[] with a string argument with array] failed with error -167000 SYS_LIBRARY_ERROR
+```
+
 
 Similarly, you can also try building using `libc++` instead of `libstdc++`
 
 ```
 # cat irods-4.3.0-GCC-11.2.0.eb
 configopts += " -DIRODS_BUILD_AGAINST_LIBCXX=TRUE "
-
 ```
 
+but this approach could lead to similar linking error
+
+```
+ld.lld: error: undefined symbol: fmt::v8::vformat(fmt::v8::basic_string_view<char>, fmt::v8::basic_format_args<fmt::v8::basic_format_context<fmt::v8::appender, char> >)
+```
+
+unless you compile all dependencies with `libc++`.
 
 ### Test
 
