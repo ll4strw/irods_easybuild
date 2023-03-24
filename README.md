@@ -96,3 +96,12 @@ ml load irods-icommands/4.3.0-GCC-11.2.0
 iinit
 ```
 
+### Notes
+
+At the time of writing, the softwares listed in the `easyconfigs` directory were unknown to the EasyBuild system,
+hence their presence here. Because I am gradually submitting them to the official EasyBuild repo, it will soon be
+possible to install `iRODS` without specifying extra robot paths (path to easyconfigs), that is
+
+```
+eb ./easyconfigs/i/irods/irods-4.3.0-GCC-11.2.0.eb [--dry-run] [--try-amend=build_cmd='make irods_client '] -r
+```
