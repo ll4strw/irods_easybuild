@@ -16,7 +16,7 @@ If you are truly interested in _bit-to-bit_ reproducibility, please take a look 
 ```
 guix package -i  irods-client-icommands
 ```
-At the time of writing, only `iRODS v4.2.8` is available.
+At the time of writing, only `iRODS v4.2.8` is available as an official GNU Guix package. However, a guix recipe to build the latest `irods` and `icommands` packages can be found [here](https://github.com/ll4strw/irods_guix). 
 
 ### Installation
 
